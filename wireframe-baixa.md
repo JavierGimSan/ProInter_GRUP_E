@@ -11,3 +11,11 @@
 ## Checkout
 
 ![alt text](wireframe-baixa/checkout.jpeg)
+
+## Shopping Cart / Product
+
+![alt text](wireframe-baixa/carrito_producto.jpg)
+
+## About us
+
+![alt text](wireframe-baixa/sobre_nosotros.jpg)
