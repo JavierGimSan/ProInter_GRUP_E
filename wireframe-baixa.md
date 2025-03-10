@@ -19,3 +19,7 @@
 ## About us
 
 ![alt text](wireframe-baixa/sobre_nosotros.jpg)
+
+## Search Page
+
+![alt text](wireframe-baixa/Wireframe_Pagina_Busqueda_page-0001.jpg)
