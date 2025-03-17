@@ -1,5 +1,6 @@
 from django.db import models
 from book.models import Book
+from user.models import User
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')

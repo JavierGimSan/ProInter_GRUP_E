@@ -1,6 +1,8 @@
 from django.db import models
 from django.forms import ValidationError
 from book.models import Book
+from user.models import User
+from payment.models import Payment
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
