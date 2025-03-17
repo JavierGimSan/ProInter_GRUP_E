@@ -5,7 +5,8 @@ from django.core.exceptions import ValidationError
 # Create your models here.
 
 class Payment(models.Model):
-    number = models.PositiveBigIntegerField(max_length=19)
+    name = models.TextField(validators=[MinLengthValidator(4)], max_length=300)
+    number = models.PositiveBigIntegerField(max_length=19, primary_key=True)
     cvc = models.PositiveSmallIntegerField(max_length=4)
     expiration = models.CharField(max_length=5,validators=[MinLengthValidator(5)])
 
