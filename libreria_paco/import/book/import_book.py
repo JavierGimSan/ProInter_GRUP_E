@@ -8,7 +8,10 @@ django.setup()
 
 from book.models import Author
 
-AUTHOR_CSV = "import/books/author.csv"
+AUTHOR_CSV = "import/book/author.csv"
+CATEGORY_CSV = "import/book/category.csv"
+BOOK_CSV = "import/book/book.csv"
+
 
 def import_authors():
     csv = pandas.read_csv(AUTHOR_CSV)
@@ -18,4 +21,11 @@ def import_authors():
         author = Author(name=name)
         author.save()
 
-import_authors()
+def import_categories():
+    csv = pandas.read_csv()
+
+    names = csv["name"].to_list()
+
+    for name in names:
+        author = Author(name=name)
+        author.save()
