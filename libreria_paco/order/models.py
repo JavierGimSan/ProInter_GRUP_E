@@ -5,7 +5,7 @@ from user.models import User
 from payment.models import Payment
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE, related_name='payment')
 
     def __str__(self):
