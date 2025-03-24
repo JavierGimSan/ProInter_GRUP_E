@@ -82,14 +82,13 @@ WSGI_APPLICATION = 'libreria_paco.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': BASE_DIR / 'db.postgresql', 
+        'NAME': 'libreria_paco',  # Nombre de la base de datos en PostgreSQL
         'USER': 'admin',   
         'PASSWORD': 'admin',
         'HOST': 'localhost',     
         'PORT': '5432', 
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
