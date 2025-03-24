@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'libreria_paco.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'libreria_paco',  # Nombre de la base de datos en PostgreSQL
+        'NAME': 'libreria',
         'USER': 'admin',   
         'PASSWORD': 'admin',
         'HOST': 'localhost',     
