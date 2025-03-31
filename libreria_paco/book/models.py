@@ -17,8 +17,8 @@ class Book(models.Model):
     description = models.TextField()
     release = models.DateField()
     cover = models.TextField()
-    author = models.ManyToManyField(Author, related_name="authors")
-    category = models.ManyToManyField(Category, related_name="categories")
+    author = models.ManyToManyField(Author, related_name="books")
+    category = models.ManyToManyField(Category, related_name="books")
 
     oneStarCount = models.PositiveBigIntegerField()
     twoStarCount = models.PositiveBigIntegerField()

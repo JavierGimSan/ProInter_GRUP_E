@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Book, Author, Category
+from .models import Book, Author, Category
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,7 +29,8 @@ class BookSerializer(serializers.ModelSerializer):
             'twoStarCount',
             'threeStarCount',
             'fourStarCount',
-            'fiveStarCount'
+            'fiveStarCount',
+            'stars'
             ]
         
     def get_stars(self, obj):
