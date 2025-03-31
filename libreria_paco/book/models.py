@@ -17,8 +17,8 @@ class Book(models.Model):
     description = models.TextField()
     release = models.DateField()
     cover = models.TextField()
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    category = models.ManyToManyField(Category, related_name="books")
+    author = models.ManyToManyField(Author, related_name="authors")
+    category = models.ManyToManyField(Category, related_name="categories")
 
     oneStarCount = models.PositiveBigIntegerField()
     twoStarCount = models.PositiveBigIntegerField()
