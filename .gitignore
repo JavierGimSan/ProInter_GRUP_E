@@ -1,0 +1,44 @@
+# Entorno de Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+
+# Entornos virtuales
+venv/
+.env/
+.venv/
+
+# Docker
+docker-compose.override.yml
+
+# PostgreSQL
+*.pid
+*.socket
+*.lock
+
+# Django
+*.log
+/staticfiles/
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Archivos temporales
+*.swp
+*.swo
+*~
+.DS_Store
+.thumbs.db
+Desktop.ini
+
+# Archivos de IDE
+.idea/
+*.iml
+
+# Archivos de compilación
+*.mo

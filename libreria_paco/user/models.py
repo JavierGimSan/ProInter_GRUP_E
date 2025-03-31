@@ -11,7 +11,7 @@ class User(models.Model):
     email = models.TextField(validators=[MinLengthValidator(5)], max_length=320)
     password = models.TextField(validators=[MinLengthValidator(2)])
     roleId = models.ForeignKey(Role, on_delete=models.CASCADE)
-    paymentId = models.ForeignKey(Payment,  on_delete=models.CASCADE)
+    paymentId = models.ForeignKey(Payment, on_delete=models.SET_NULL, null=True, blank=True)
 
     def clean(self):
         super().clean()
