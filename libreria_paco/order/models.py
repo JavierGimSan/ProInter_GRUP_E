@@ -5,11 +5,11 @@ from user.models import User
 from payment.models import Payment
 
 class Order(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE, related_name='payment')
 
     def __str__(self):
-        return f"{self.user_id} - {self.payment}"
+        return f"{self.user} - {self.payment}"
     
 class OrderItem(models.Model):
     STATUS_CHOICES = [
@@ -19,9 +19,9 @@ class OrderItem(models.Model):
         ('canceled', 'Cancelado'),
     ]
         
-    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='books')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='books')
     quantity = models.IntegerField()
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order')
     status = models.CharField(max_length=50)
 
     def clean(self):
