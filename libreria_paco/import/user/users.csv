@@ -1,5 +1,8 @@
-name, lastName, email, roleId, paymentId
+name,lastName,email,password,roleId,paymentId
 
-Paco, Gutierrez Martin, pacoguti@gmail.com, admin, 1234123412341234
-Alfonso, Diaz Arroyo, alfonsodia8@iticbcn.cat, user, 1029384756102938
-Maria Jose, Santo Cruz, majolesa@gmail.com, user, 039487264928471948
+Paco, Gutierrez Martin, pacoguti@gmail.com, admin, admin, 1234123412341234
+Alfonso, Diaz Arroyo, alfonsodia8@iticbcn.cat, pass12, user, 1029384756102938
+Maria Jose, Santo Cruz, majolesa@gmail.com, con123, user, 039487264928471948
+Carlos, Manuel Arroyo, majolesa@gmail.com, aver, user,
+Nil, Ruiz Saez, nirusa5@gmail.com, word87, user,
+Rita, Alba Lopez, ritaa1234@gmail.com, rita12, user,039448
