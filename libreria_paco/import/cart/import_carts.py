@@ -7,21 +7,21 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "libreria_paco.settings")
 django.setup()
 
 
-from order.models import Order
+from cart.models import Cart
 
-def importar_csv_order():
-    df = pd.read_csv("./import/order/orders.csv")
+def importar_csv_cart():
+    df = pd.read_csv("./import/cart/cart.csv")
     # print(df.head())
-    orders = [
-        Order(
+    carts = [
+        Cart(
             id = row["id"],
             user_id = row["userId"],
-            payment_id = row["payment"]
+            created_at = row["created_at"]
         )
         for _, row in df.iterrows()
     ]
 
-    Order.objects.bulk_create(orders)
-    print("Orders importadas con éxito!")
+    Cart.objects.bulk_create(carts)
+    print("Carts importados con éxito!")
 
-importar_csv_order()
+importar_csv_cart()

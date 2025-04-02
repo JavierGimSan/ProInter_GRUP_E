@@ -3,7 +3,7 @@ import pandas as pd
 import sys, os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "libreria_paco.settings")  # Asegúrate de usar el nombre correcto de tu proyecto
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "libreria_paco.settings") 
 django.setup()
 
 
