@@ -8,6 +8,9 @@ BOOK_CSV = "import/book/book.csv"
 def getRandomStars():
     return randint(0, 500)
 
+def getRandomPrice():
+    return randint(10, 35)
+
 def get_book_csv(pages: int = 10):
     for page in range(1, pages):
         base_url = "https://gutendex.com"
@@ -32,7 +35,8 @@ def get_book_csv(pages: int = 10):
                 "1949-06-08",
                 book.get("formats", {}).get("image/jpeg", ""),
                 "|".join(map(str, author_ids)),
-                "|".join(map(str, category_ids)), 
+                "|".join(map(str, category_ids)),
+                getRandomPrice(),
                 getRandomStars(),
                 getRandomStars(),
                 getRandomStars(),
@@ -41,7 +45,7 @@ def get_book_csv(pages: int = 10):
             ])
 
         author_headers = ["name"] if page == 1 else None
-        book_headers = ["title","description","release","cover","author_ids","category_ids","oneStarCount","twoStarCount","threeStarCount","fourStarCount","fiveStarCount"] if page == 1 else None
+        book_headers = ["title","description","release","cover","author_ids","category_ids", "price","oneStarCount","twoStarCount","threeStarCount","fourStarCount","fiveStarCount"] if page == 1 else None
         save_to_csv(AUTHOR_CSV, [[name] for name in authors], author_headers)
         save_to_csv(CATEGORY_CSV, [[name] for name in categories], author_headers)
         save_to_csv(BOOK_CSV, books, book_headers)

@@ -91,6 +91,11 @@ DATABASES = {
     }
 }
 
+VECTOR_STORAGE = BASE_DIR / "RAG" / "vector_storage"
+EMBEDDING_MODEL = "mxbai-embed-large"
+LLM_MODEL = "deepseek-r1:1.5b"
+OLLAMA_SERVER = "http://0.0.0.0:11434"
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

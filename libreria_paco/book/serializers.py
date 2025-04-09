@@ -25,6 +25,7 @@ class BookSerializer(serializers.ModelSerializer):
             'cover',
             'author',
             'category',
+            'price',
             'oneStarCount',
             'twoStarCount',
             'threeStarCount',

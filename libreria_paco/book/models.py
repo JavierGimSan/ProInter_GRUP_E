@@ -19,6 +19,7 @@ class Book(models.Model):
     cover = models.TextField()
     author = models.ManyToManyField(Author, related_name="books")
     category = models.ManyToManyField(Category, related_name="books")
+    price = models.PositiveIntegerField(default=0)
 
     oneStarCount = models.PositiveBigIntegerField()
     twoStarCount = models.PositiveBigIntegerField()
@@ -37,4 +38,9 @@ class Book(models.Model):
         return sumOfStars / totalCount
 
     def __str__(self):
-        return f"{self.title} - {self.author}"
+        return self.title
+
+    def detailed_str(self):
+        authors = " ".join([a.name for a in self.author.all()])
+        categories = " ".join([c.name for c in self.category.all()])
+        return f"Title: {self.title}\nAuthors: {authors}\nCategories: {categories}\nDescription: {self.description}"
