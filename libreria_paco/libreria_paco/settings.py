@@ -25,8 +25,13 @@ SECRET_KEY = 'django-insecure-fe4z!zn*55^p)6cv(2t$k0ll)voyx$bhodk-5^21pe!98#ubr$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost"
+]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 
 # Application definition
 
@@ -43,7 +48,8 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'role.apps.RoleConfig',
     'user.apps.UserConfig',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'libreria_paco.urls'
