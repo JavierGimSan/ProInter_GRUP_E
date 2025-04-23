@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'rest_framework',
     'corsheaders'
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
