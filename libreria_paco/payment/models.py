@@ -41,4 +41,6 @@ class Payment(models.Model):
                 raise ValidationError({'expiration':'El formato MM/YY de la fecha de expiracion es incorrecto'})
         else:
             raise ValidationError({'expiration':'El formato MM/YY de la fecha de expiracion es incorrecto'})
-#db_diagram
+
+def __str__(self):
+    print (f"Tarjeta: ...{str(self.number)[-4:]}")

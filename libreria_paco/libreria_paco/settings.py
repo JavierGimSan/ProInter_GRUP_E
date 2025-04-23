@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'order.apps.OrderConfig',
     'payment.apps.PaymentConfig',
     'role.apps.RoleConfig',
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
