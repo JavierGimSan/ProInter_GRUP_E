@@ -21,6 +21,25 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    entrypoint: >
+      /bin/bash -c "
+      ollama serve &
+      sleep 5 &&
+      ollama pull deepseek-r1:1.5b &&
+      ollama pull mxbai-embed-large &&
+      tail -f /dev/null
+      "
+
 volumes:
   local_pgdata:
   pgadmin-data:
+  ollama_data:

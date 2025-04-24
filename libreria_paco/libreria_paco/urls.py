@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from cart.views import ver_carrito, ver_producto
 
@@ -23,4 +23,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("carrito/<int:id>", ver_carrito, name="ver_carrito"),
     path("producto/<int:id>", ver_producto, name="ver_producto"),
+    path('', include('book.urls'))
+
 ]
