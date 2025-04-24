@@ -31,3 +31,4 @@ class PaymentReadSerializer(serializers.ModelSerializer):
     
     def get_cvc_exists(self, obj):
         return bool(obj.cvc)
+
