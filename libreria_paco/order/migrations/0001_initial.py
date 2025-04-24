@@ -9,8 +9,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('payment', '0001_initial'),
         ('book', '0001_initial'),
+        ('payment', '0001_initial'),
         ('user', '0001_initial'),
     ]
 

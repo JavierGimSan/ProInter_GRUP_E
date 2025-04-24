@@ -25,8 +25,13 @@ SECRET_KEY = 'django-insecure-fe4z!zn*55^p)6cv(2t$k0ll)voyx$bhodk-5^21pe!98#ubr$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost"
+]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 
 # Application definition
 
@@ -42,9 +47,10 @@ INSTALLED_APPS = [
     'order.apps.OrderConfig',
     'payment.apps.PaymentConfig',
     'role.apps.RoleConfig',
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'rest_framework',
+    'corsheaders',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'libreria_paco.urls'
@@ -89,6 +97,11 @@ DATABASES = {
         'PORT': '5432', 
     }
 }
+
+VECTOR_STORAGE = BASE_DIR / "RAG" / "vector_storage"
+EMBEDDING_MODEL = "mxbai-embed-large"
+LLM_MODEL = "deepseek-r1:1.5b"
+OLLAMA_SERVER = "http://0.0.0.0:11434"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

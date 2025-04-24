@@ -6,8 +6,8 @@ from django.core.exceptions import ValidationError
 
 class Payment(models.Model):
     name = models.TextField(validators=[MinLengthValidator(4)], max_length=300)
-    number = models.PositiveBigIntegerField(max_length=19, primary_key=True)
-    cvc = models.PositiveSmallIntegerField(max_length=4)
+    number = models.PositiveBigIntegerField(primary_key=True)
+    cvc = models.CharField(max_length=4, validators=[MinLengthValidator(3)])
     expiration = models.CharField(max_length=5,validators=[MinLengthValidator(5)])
 
     def clean(self):
@@ -24,7 +24,7 @@ class Payment(models.Model):
     def valid_cvc(self):
         cvc_tarjeta = str(self.cvc)
         if len(cvc_tarjeta) < 3 or len(cvc_tarjeta) > 4:
-            raise ValidationError({'cvc':'largo del CVC es incorrecto'})        
+            raise ValidationError({'cvc':'el largo del CVC es incorrecto'})        
 
     def valid_expiration(self):
         if len(self.expiration)==5 and self.expiration[2]=='/':
@@ -41,4 +41,6 @@ class Payment(models.Model):
                 raise ValidationError({'expiration':'El formato MM/YY de la fecha de expiracion es incorrecto'})
         else:
             raise ValidationError({'expiration':'El formato MM/YY de la fecha de expiracion es incorrecto'})
-#db_diagram
+
+def __str__(self):
+    print (f"Tarjeta: ...{str(self.number)[-4:]}")
