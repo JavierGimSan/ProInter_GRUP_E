@@ -49,8 +49,8 @@ INSTALLED_APPS = [
     'role.apps.RoleConfig',
     'user.apps.UserConfig',
     'rest_framework',
-    'corsheaders'
-
+    'corsheaders',
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
