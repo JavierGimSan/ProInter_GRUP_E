@@ -13,15 +13,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 
+from cart.views import actualizar_producto, agregar_producto, borrar_carrito, borrar_producto, crear_carrito, ver_carrito, ver_carritos, ver_producto
+from order.views import borrar_orden, crear_orden, ver_orden, ver_ordenes
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("carrito/<int:id>", ver_carrito, name="ver_carrito"),
+    path("carrito/borrar/<int:id>/", borrar_carrito, name="borrar_carrito"),
+    path("carrito/crear/", crear_carrito, name="crear_carrito"),
+    path("carritos/usuario/<int:id>/", ver_carritos, name="ver_carritos_usuario"),
+    path("producto/<int:id>", ver_producto, name="ver_producto"),
+    path("producto/borrar/<int:id>/", borrar_producto, name="borrar_producto"),
+    path("producto/agregar/", agregar_producto, name="agregar_producto"),
+    path("producto/actualizar/<int:id>/", actualizar_producto, name="actualizar_producto"),
+    path("orden/<int:id>/", ver_orden, name="ver_orden"),
+    path("orden/usuario/<int:id>/", ver_ordenes, name="ver_ordenes_usuario"),
+    path("orden/crear/", crear_orden, name="crear_orden"),
+    path("orden/borrar/<int:id>/", borrar_orden, name="borrar_orden"),
     path('payment/', include('payment.urls')),
     path('user/', include('user.urls')),
     path('', include('book.urls')),
-    path('payment/', include('payment.urls')),
-    path('user/', include('user.urls')),
-    path('', include('book.urls'))
 ]
