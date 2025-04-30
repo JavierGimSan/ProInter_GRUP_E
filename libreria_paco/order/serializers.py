@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from user.serializers import UserSerializer
-from payment.serializers import PaymentSerializer
+from user.serializers import UserReadSerializer
+from payment.serializers import PaymentReadSerializer
 from book.serializers import BookSerializer
 from .models import OrderItem, Order
 
@@ -13,9 +13,9 @@ class OrderItemSerializer(serializers.ModelSerializer):
         fields= "__all__"
 
 class OrderSerializer(serializers.ModelSerializer):
-    user=UserSerializer(read_only=True)
+    user=UserReadSerializer(read_only=True)
     orderitem_set = OrderItemSerializer(many=True, read_only=True, source='cartitem_set')
-    payment=PaymentSerializer(read_only=True)
+    payment=PaymentReadSerializer(read_only=True)
 
     class Meta:
         model = Order

@@ -100,7 +100,7 @@ def borrar_producto(request, id):
 
 #View para actualizar la cantidad de un cratItem
 @api_view(['PATCH'])
-def actiualizar_producto(request, id):
+def actualizar_producto(request, id):
     try:
         cartItem = CartItem.objects.get(pk=id)
     except CartItem.DoesNotExist:
