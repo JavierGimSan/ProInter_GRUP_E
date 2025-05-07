@@ -21,3 +21,6 @@ class User(models.Model):
     def valid_email(self):
         validar = EmailValidator(message='Formato del correo electrónico incorrecto')
         validar(self.email)
+
+def __str__(self):
+    return self.email

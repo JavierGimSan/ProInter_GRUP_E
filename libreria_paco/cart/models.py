@@ -10,8 +10,8 @@ class Cart(models.Model):
         return f"{self.user} - {self.created_at}"
 
 class CartItem(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='book')
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='cart_items')
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
     quantity = models.IntegerField()
 
     def __str__(self):
