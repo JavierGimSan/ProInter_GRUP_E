@@ -35,7 +35,7 @@ class Book(models.Model):
 
         sumOfStars = sum(count * (idx + 1) for idx, count in enumerate(stars))
 
-        return sumOfStars / totalCount
+        return round(sumOfStars / totalCount, 2)
 
     def __str__(self):
         return self.title
@@ -43,4 +43,4 @@ class Book(models.Model):
     def detailed_str(self):
         authors = " ".join([a.name for a in self.author.all()])
         categories = " ".join([c.name for c in self.category.all()])
-        return f"Title: {self.title}\nAuthors: {authors}\nCategories: {categories}\nDescription: {self.description}"
+        return f"Title: {self.title}\nAuthors: {authors}\nCategories: {categories}\nDescription: {self.description}\nPrice: {self.price}\nStars: {self.stars}"
