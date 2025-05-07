@@ -100,7 +100,8 @@ DATABASES = {
 
 VECTOR_STORAGE = BASE_DIR / "RAG" / "vector_storage"
 EMBEDDING_MODEL = "mxbai-embed-large"
-LLM_MODEL = "deepseek-r1:1.5b"
+# LLM_MODEL = "deepseek-r1:1.5b"
+LLM_MODEL = "gemini"
 OLLAMA_SERVER = "http://0.0.0.0:11434"
 
 # Password validation

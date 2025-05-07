@@ -7,11 +7,22 @@ from..serializers import BookSerializer
 from datetime import datetime
 from RAG.VectorStorage import VectorStorage
 
+from django.db.models import Q
+from datetime import datetime
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
 @api_view(["GET"])
 def get_all_books(request):
     search = request.query_params.get("search")
     releaseFrom = request.query_params.get("releaseFrom")
     releaseTo = request.query_params.get("releaseTo")
+    categories = request.query_params.get("category")
+    priceFrom = request.query_params.get("priceFrom")
+    priceTo = request.query_params.get("priceTo")
+    starsFrom = request.query_params.get("starsFrom")
+    starsTo = request.query_params.get("starsTo")
     
     filters = Q()
 
@@ -20,6 +31,13 @@ def get_all_books(request):
                     Q(category__name__icontains=search) |
                     Q(author__name__icontains=search))
     
+    if categories:
+        try:
+            category_ids = [int(cid) for cid in categories.split(',') if cid.strip().isdigit()]
+            filters &= Q(category__id__in=category_ids)
+        except ValueError:
+            return Response({"error": "Los IDs de categoría deben ser enteros separados por comas."}, status=status.HTTP_400_BAD_REQUEST)
+
     if releaseFrom:
         try:
             release_date = datetime.strptime(releaseFrom, '%Y-%m-%d').date()
@@ -33,11 +51,36 @@ def get_all_books(request):
             filters &= Q(release__lte=release_date)
         except ValueError:
             return Response({"error": "Formato de fecha no válido. Use 'YYYY-MM-DD'."}, status=status.HTTP_400_BAD_REQUEST)
-    
-    books = Book.objects.filter(filters)
+
+    if priceFrom:
+        try:
+            filters &= Q(price__gte=int(priceFrom))
+        except ValueError:
+            return Response({"error": "El parámetro 'priceFrom' debe ser un número."}, status=status.HTTP_400_BAD_REQUEST)
+
+    if priceTo:
+        try:
+            filters &= Q(price__lte=int(priceTo))
+        except ValueError:
+            return Response({"error": "El parámetro 'priceTo' debe ser un número."}, status=status.HTTP_400_BAD_REQUEST)
+
+    books = Book.objects.filter(filters).distinct()
+
+    try:
+        stars_from = float(starsFrom) if starsFrom else None
+        stars_to = float(starsTo) if starsTo else None
+    except ValueError:
+        return Response({"error": "Los parámetros 'starsFrom' y 'starsTo' deben ser números."}, status=status.HTTP_400_BAD_REQUEST)
+
+    if stars_from is not None:
+        books = [book for book in books if book.stars >= stars_from]
+
+    if stars_to is not None:
+        books = [book for book in books if book.stars <= stars_to]
 
     serializer = BookSerializer(books, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 @api_view(["GET"])
 def get_book(request, id: int):
