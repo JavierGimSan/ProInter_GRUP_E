@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 
 class Payment(models.Model):
     name = models.TextField(validators=[MinLengthValidator(4)], max_length=300)
-    number = models.PositiveBigIntegerField(primary_key=True)
+    number = models.CharField(primary_key=True)
     cvc = models.CharField(max_length=4, validators=[MinLengthValidator(3)])
     expiration = models.CharField(max_length=5,validators=[MinLengthValidator(5)])
 
