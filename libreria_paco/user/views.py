@@ -6,6 +6,16 @@ from user.models import User
 from .serializers import UserCreateSerializer, UserReadSerializer, UserReadAllSerializer
 # Create your views here.
 
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+
+class MeView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserReadSerializer(request.user)
+        return Response(serializer.data)
+
 @api_view(['POST'])
 def crea_user(request):
     if request.method == 'POST':
