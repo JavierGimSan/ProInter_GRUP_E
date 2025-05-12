@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from cart.views import actualizar_producto, agregar_producto, borrar_carrito, borrar_producto, crear_carrito, ver_carrito, ver_carritos, ver_producto
+from cart.views import actualizar_producto, agregar_producto, borrar_carrito, borrar_producto, crear_carrito, ver_carrito, ver_carrito, ver_producto
 from order.views import borrar_orden, crear_orden, ver_orden, ver_ordenes
 
 urlpatterns = [
@@ -25,7 +25,7 @@ urlpatterns = [
     path("carrito/<int:id>", ver_carrito, name="ver_carrito"),
     path("carrito/borrar/<int:id>/", borrar_carrito, name="borrar_carrito"),
     path("carrito/crear/", crear_carrito, name="crear_carrito"),
-    path("carritos/usuario/<int:id>/", ver_carritos, name="ver_carritos_usuario"),
+    path("carrito/usuario/<int:id>/", ver_carrito, name="ver_carrito_usuario"),
     path("producto/<int:id>", ver_producto, name="ver_producto"),
     path("producto/borrar/<int:id>/", borrar_producto, name="borrar_producto"),
     path("producto/agregar/", agregar_producto, name="agregar_producto"),

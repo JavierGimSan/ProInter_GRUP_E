@@ -22,9 +22,9 @@ def ver_carrito(request, id):
     return Response(serializer.data)
 
 
-# View para ver los carritos pertenecientes a un usuario
+# View para ver el carrito perteneciente a un usuario
 @api_view(["GET"])
-def ver_carritos(request, id):
+def ver_carrito(request, id):
     try:
         user = User.objects.get(pk=id)
     except User.DoesNotExist:
