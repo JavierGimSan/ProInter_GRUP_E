@@ -3,15 +3,18 @@ from rest_framework.response import Response
 from django.db.models import Q
 from rest_framework import status
 from ..models import Book, Author, Category
-from..serializers import BookSerializer
+from..serializers import BookSerializer, BookWriteSerializer
 from datetime import datetime
 from RAG.VectorStorage import VectorStorage
-
+from django.conf import settings
 from django.db.models import Q
 from datetime import datetime
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
+from uuid import uuid4
+import os
 
 @api_view(["GET"])
 def get_all_books(request):
@@ -103,14 +106,46 @@ def get_related_books(request):
         return Response(({"error": "Error getting related books"}), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(["GET"])
+def get_top_books(request):
+    limit = request.query_params.get("limit")
+    if limit: limit = int(limit) 
+    else: limit = 20
+    books = list(Book.objects.all())
+    books.sort(key=lambda book: book.stars, reverse=True)
+    top_books = books[:limit]
+    serializer = BookSerializer(top_books, many=True)
+    return Response(serializer.data, status.HTTP_200_OK)
+
 @api_view(["POST"])
+@parser_classes([MultiPartParser, FormParser])
 def create_book(request):
-    book = BookSerializer(request.data)
-    if not book.is_valid(): return Response(book.errors, status=status.HTTP_400_BAD_REQUEST)
-    book.save()
+    cover_file = request.FILES.get("cover")
+    mutable_data = request.data.copy()
+
+    if cover_file:
+        file_name = f"{uuid4()}_{cover_file.name}"
+        cover_path = os.path.join("uploads", file_name)
+        full_path = os.path.join(settings.MEDIA_ROOT, cover_path)
+
+        os.makedirs(os.path.dirname(full_path), exist_ok=True)
+        with open(full_path, "wb+") as destination:
+            for chunk in cover_file.chunks():
+                destination.write(chunk)
+
+        cover_url = request.build_absolute_uri(os.path.join(settings.MEDIA_URL, cover_path))
+        mutable_data["cover"] = cover_url
+
+    serializer = BookWriteSerializer(data=mutable_data)
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    book = serializer.save()
     vector_storage = VectorStorage()
     vector_storage.add_book(book)
-    return Response(book.data, status=status.HTTP_201_CREATED)
+
+    read_serializer = BookSerializer(book)
+    return Response(read_serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(["DELETE"])
 def delete_book(request, id: int):

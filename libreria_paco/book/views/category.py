@@ -12,7 +12,7 @@ def get_all_categories(request):
 
 @api_view(["POST"])
 def create_category(request):
-    serializer = CategorySerializer(request.data)
+    serializer = CategorySerializer(data=request.data)
     if not serializer.is_valid(): return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
