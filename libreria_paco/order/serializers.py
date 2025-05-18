@@ -3,6 +3,8 @@ from user.serializers import UserReadSerializer
 from payment.serializers import PaymentReadSerializer
 from book.serializers import BookSerializer
 from .models import OrderItem, Order
+from user.models import User
+from payment.models import Payment
 
 class OrderItemSerializer(serializers.ModelSerializer):
     book = BookSerializer(read_only=True)
@@ -13,9 +15,9 @@ class OrderItemSerializer(serializers.ModelSerializer):
         fields= "__all__"
 
 class OrderSerializer(serializers.ModelSerializer):
-    user=UserReadSerializer(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     orderitem_set = OrderItemSerializer(many=True, read_only=True, source='cartitem_set')
-    payment=PaymentReadSerializer(read_only=True)
+    payment = serializers.PrimaryKeyRelatedField(queryset=Payment.objects.all())
 
     class Meta:
         model = Order

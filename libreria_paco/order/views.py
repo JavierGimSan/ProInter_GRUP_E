@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from requests import Response
+# from requests import Response
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .serializers import OrderSerializer, OrderItemSerializer
 from user.models import User
 from  .models import Order, OrderItem
+from payment.models import Payment
 
 #View para ver los productos que contiene una orden 
 @api_view(["GET"])
