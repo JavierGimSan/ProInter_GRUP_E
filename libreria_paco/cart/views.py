@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from .serializers import CartItemSerializer, CartSerializer
+from .serializers import CreateCartItemSerializer, CartItemSerializer, CartSerializer
 from .models import Cart, CartItem
 from django.shortcuts import render
 from rest_framework.decorators import api_view
@@ -64,7 +64,7 @@ def crear_carrito(request):
 #View para crear un nuevo cartItem
 @api_view(["POST"])
 def agregar_producto(request):
-    serializer = CartItemSerializer(data=request.data)
+    serializer = CreateCartItemSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save()

@@ -33,7 +33,7 @@ def get_author_books(request, id: int):
 
 @api_view(["POST"])
 def create_author(request):
-    serializer = AuthorSerializer(request.data)
+    serializer = AuthorSerializer(data=request.data)
     if not serializer.is_valid(): return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     serializer.save()

@@ -20,6 +20,7 @@ category_urls = [
 book_urls = [
     path("books/", book.get_all_books, name="get_all_books"),
     path("books/<int:id>/", book.get_book, name="get_book"),
+    path("books/top", book.get_top_books, name="get_top_books"),
     path("books/related", book.get_related_books, name="get_ralated_books"),
     path("books/create", book.create_book, name="create_book"),
     path("books/<int:id>/delete", book.delete_book, name="delete_book"),

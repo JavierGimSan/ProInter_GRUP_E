@@ -37,3 +37,20 @@ class BookSerializer(serializers.ModelSerializer):
         
     def get_stars(self, obj):
             return obj.stars
+    
+class BookWriteSerializer(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Author.objects.all()
+    )
+    category = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Category.objects.all()
+    )
+
+    class Meta:
+        model = Book
+        fields = [
+            'title', 'description', 'release', 'cover',
+            'author', 'category', 'price',
+            'oneStarCount', 'twoStarCount', 'threeStarCount',
+            'fourStarCount', 'fiveStarCount',
+        ]

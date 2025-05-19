@@ -21,11 +21,11 @@ class Book(models.Model):
     category = models.ManyToManyField(Category, related_name="books")
     price = models.PositiveIntegerField(default=0)
 
-    oneStarCount = models.PositiveBigIntegerField()
-    twoStarCount = models.PositiveBigIntegerField()
-    threeStarCount = models.PositiveBigIntegerField()
-    fourStarCount = models.PositiveBigIntegerField()
-    fiveStarCount = models.PositiveBigIntegerField()
+    oneStarCount = models.PositiveBigIntegerField(default=0, blank=True)
+    twoStarCount = models.PositiveBigIntegerField(default=0, blank=True)
+    threeStarCount = models.PositiveBigIntegerField(default=0, blank=True)
+    fourStarCount = models.PositiveBigIntegerField(default=0, blank=True)
+    fiveStarCount = models.PositiveBigIntegerField(default=0, blank=True)
 
     @property
     def stars(self):
