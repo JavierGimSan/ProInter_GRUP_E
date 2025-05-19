@@ -24,7 +24,12 @@ book_urls = [
     path("books/related", book.get_related_books, name="get_ralated_books"),
     path("books/create", book.create_book, name="create_book"),
     path("books/<int:id>/delete", book.delete_book, name="delete_book"),
-    path("books/<int:id>/update", book.patch_book, name="patch_book")
+    path("books/<int:id>/update", book.patch_book, name="patch_book"),
+    path("book/<int:id>/vote-one", book.vote_one_star, name="vote_one"),
+    path("book/<int:id>/vote-two", book.vote_two_star, name="vote_two"),
+    path("book/<int:id>/vote-three", book.vote_three_star, name="vote_three"),
+    path("book/<int:id>/vote-four", book.vote_four_star, name="vote_four"),
+    path("book/<int:id>/vote-five", book.vote_five_star, name="vote_five")
 ]
 
 rag_urls = [

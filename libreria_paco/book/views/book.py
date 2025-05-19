@@ -209,3 +209,58 @@ def patch_book(request, id: int):
     book.save()
     serializer = BookSerializer(book)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(["GET"])
+def vote_one_star(request, id: int):
+    try:
+        book = Book.objects.get(id=id)
+    except Book.DoesNotExist:
+        return Response({"error": "Book not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    book.oneStarCount += 1
+    book.save()
+    return Response({"message": "Book updated"})
+
+@api_view(["GET"])
+def vote_two_star(request, id: int):
+    try:
+        book = Book.objects.get(id=id)
+    except Book.DoesNotExist:
+        return Response({"error": "Book not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    book.twoStarCount += 1
+    book.save()
+    return Response({"message": "Book updated"})
+
+@api_view(["GET"])
+def vote_three_star(request, id: int):
+    try:
+        book = Book.objects.get(id=id)
+    except Book.DoesNotExist:
+        return Response({"error": "Book not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    book.threeStarCount += 1
+    book.save()
+    return Response({"message": "Book updated"})
+
+@api_view(["GET"])
+def vote_four_star(request, id: int):
+    try:
+        book = Book.objects.get(id=id)
+    except Book.DoesNotExist:
+        return Response({"error": "Book not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    book.fourStarCount += 1
+    book.save()
+    return Response({"message": "Book updated"})
+
+@api_view(["GET"])
+def vote_five_star(request, id: int):
+    try:
+        book = Book.objects.get(id=id)
+    except Book.DoesNotExist:
+        return Response({"error": "Book not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    book.fiveStarCount += 1
+    book.save()
+    return Response({"message": "Book updated"})
